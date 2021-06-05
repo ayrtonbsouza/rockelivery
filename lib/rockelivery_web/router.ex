@@ -5,10 +5,10 @@ defmodule RockeliveryWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/api", RockeliveryWeb do
+  scope "/api/v1", RockeliveryWeb do
     pipe_through :api
 
-    get "/:id", WelcomeController, :index
+    resources "/users", UsersController, except: [:new, :edit]
   end
 
   if Mix.env() in [:dev, :test] do
