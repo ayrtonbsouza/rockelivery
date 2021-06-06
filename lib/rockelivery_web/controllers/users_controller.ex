@@ -14,6 +14,14 @@ defmodule RockeliveryWeb.UsersController do
     end
   end
 
+  def delete(connection, %{"id" => id}) do
+    with {:ok, %User{}} <- Rockelivery.delete_user(id) do
+      connection
+      |> put_status(:no_content)
+      |> text("")
+    end
+  end
+
   def show(connection, %{"id" => id}) do
     with {:ok, %User{} = user} <- Rockelivery.get_user_by_id(id) do
       connection
